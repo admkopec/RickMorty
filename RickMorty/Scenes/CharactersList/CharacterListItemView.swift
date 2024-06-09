@@ -13,30 +13,45 @@ struct CharacterListItemView: View {
     
     var body: some View {
         HStack {
-            AsyncImage(url: character.image) { image in
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 50, height: 50)
-                    .clipShape(Circle())
-            } placeholder: {
-                Color(uiColor: .systemFill)
-                    .overlay(ProgressView())
-                    .frame(width: 50, height: 50)
-                    .clipShape(Circle())
+            AsyncImage(url: character.image) { phase in
+                if let image = phase.image {
+                    // Loaded image
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 50, height: 50)
+                        .clipShape(Circle())
+                } else if phase.error != nil {
+                    // Error View
+                    Color(uiColor: .systemFill)
+                        .overlay(Image(systemName: "exclamationmark.triangle.fill"))
+                        .frame(width: 50, height: 50)
+                        .clipShape(Circle())
+                } else {
+                    // Placeholder View
+                    Color(uiColor: .systemFill)
+                        .overlay(ProgressView())
+                        .frame(width: 50, height: 50)
+                        .clipShape(Circle())
+                }
             }
+            
             Text(character.name)
+            
             Spacer()
+            
             if isFavourite {
                 Image(systemName: "heart.fill")
                     .foregroundStyle(.red)
             }
+            
+            // Disclosure Indicator
             Image(systemName: "chevron.right")
                 .foregroundStyle(.secondary)
         }
         .padding(.horizontal)
-        .padding(.vertical, 10)
-        .background(.regularMaterial)
+        .padding(.vertical, Margin.small)
+        .background(Color(uiColor: .secondarySystemBackground))
         .clipShape(RoundedRectangle(cornerRadius: 10))
     }
 }

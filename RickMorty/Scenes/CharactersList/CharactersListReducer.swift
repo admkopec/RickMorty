@@ -18,6 +18,7 @@ struct CharactersListReducer {
         var errorMessage: String?
         
         var characters: IdentifiedArrayOf<Character> = []
+        // Using a set to store favourite character IDs for faster lookups
         var favouriteCharacterIds: Set<Int> = []
     }
     
@@ -36,6 +37,7 @@ struct CharactersListReducer {
         Reduce { state, action in
             switch action {
             case .fetchFavourites:
+                // Fetch the favourite character IDs using repository client
                 return .run { send in
                     let favouriteCharacterIds = try await self.repositoryClient.fetchFavouriteCharacterIds()
                     await send(.favouritesResponse(favouriteCharacterIds))
@@ -44,6 +46,7 @@ struct CharactersListReducer {
                 state.favouriteCharacterIds = Set(favouriteCharacterIds)
                 return .none
             case .fetchNextPage:
+                // Fetch the next page of characters using API client
                 state.isLoading = true
                 return .run { [currentPage = state.currentPage] send in
                     let nextPage = currentPage.map({ $0 + 1 })
@@ -55,12 +58,16 @@ struct CharactersListReducer {
                     }
                 }
             case let .pageResponse((characters, moreAvailable)):
+                // Append the fetched characters to the list
                 state.characters.append(contentsOf: characters)
+                // Update the current page number
                 state.currentPage = state.currentPage.map({ $0 + 1 }) ?? 1
+                // Determine whether we should try to load more pages next time
                 state.didReachEnd = !moreAvailable
                 state.isLoading = false
                 return .none
             case let .networkError(error):
+                // Display the error message from the network call
                 state.errorMessage = error.localizedDescription
                 state.isLoading = false
                 return .none

@@ -17,7 +17,10 @@ struct CharactersListView: View {
                 LazyVStack {
                     ForEach(store.characters) { character in
                         WithPerceptionTracking {
-                            NavigationLink(destination: CharacterDetailsView(store: Store(initialState: CharacterDetailsReducer.State(character: character), reducer: { CharacterDetailsReducer() }))) {
+                            NavigationLink(destination: 
+                                            CharacterDetailsView(store: Store(initialState: CharacterDetailsReducer.State(character: character), reducer: { CharacterDetailsReducer() }))
+                            ) {
+                                // Display favourite badge if character's ID is in favourites
                                 CharacterListItemView(character: character, isFavourite: store.favouriteCharacterIds.contains(character.id))
                             }
                             .buttonStyle(.plain)
@@ -27,7 +30,7 @@ struct CharactersListView: View {
                         VStack {
                             Image(systemName: "exclamationmark.triangle.fill")
                                 .font(.largeTitle)
-                                .padding(.bottom, 3)
+                                .padding(.bottom, Margin.extraSmall)
                             Text("Could not load data!")
                                 .font(.subheadline)
                                 .bold()

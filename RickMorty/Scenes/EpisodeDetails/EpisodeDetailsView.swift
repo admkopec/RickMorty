@@ -6,13 +6,43 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 struct EpisodeDetailsView: View {
+    let episode: Episode
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ScrollView {
+            WithPerceptionTracking {
+                VStack {
+                    Text(episode.name)
+                        .font(.title)
+                    Text(episode.episode)
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                        .padding(.bottom, Margin.large)
+                    GroupBox {
+                        HStack {
+                            Text("First aired")
+                                .bold()
+                            Spacer()
+                            Text(episode.air_date)
+                        }
+                        HStack {
+                            Text("Number of characters")
+                                .bold()
+                            Spacer()
+                            Text(episode.characters.count, format: .number)
+                        }
+                    }
+                }
+                .padding()
+            }
+        }
+        .navigationTitle(episode.episode)
     }
 }
 
 #Preview {
-    EpisodeDetailsView()
+    EpisodeDetailsView(episode: .preview)
 }

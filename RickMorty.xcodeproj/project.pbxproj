@@ -32,6 +32,9 @@
 		3B4704432C151AB2003B3238 /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4704422C151AB2003B3238 /* Async.swift */; };
 		3B4704452C1525FF003B3238 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4704442C1525FE003B3238 /* OnboardingView.swift */; };
 		3B47044B2C152E6D003B3238 /* RepositoryClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B47044A2C152E6D003B3238 /* RepositoryClient.swift */; };
+		3B47044F2C15CD2F003B3238 /* GeometryModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B47044E2C15CD2F003B3238 /* GeometryModifier.swift */; };
+		3B4704532C15D24C003B3238 /* Shadows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4704522C15D24C003B3238 /* Shadows.swift */; };
+		3B4704552C15D251003B3238 /* Margins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4704542C15D251003B3238 /* Margins.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +82,9 @@
 		3B4704422C151AB2003B3238 /* Async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Async.swift; sourceTree = "<group>"; };
 		3B4704442C1525FE003B3238 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		3B47044A2C152E6D003B3238 /* RepositoryClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryClient.swift; sourceTree = "<group>"; };
+		3B47044E2C15CD2F003B3238 /* GeometryModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryModifier.swift; sourceTree = "<group>"; };
+		3B4704522C15D24C003B3238 /* Shadows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shadows.swift; sourceTree = "<group>"; };
+		3B4704542C15D251003B3238 /* Margins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Margins.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -256,6 +262,9 @@
 			isa = PBXGroup;
 			children = (
 				3B4704422C151AB2003B3238 /* Async.swift */,
+				3B47044E2C15CD2F003B3238 /* GeometryModifier.swift */,
+				3B4704522C15D24C003B3238 /* Shadows.swift */,
+				3B4704542C15D251003B3238 /* Margins.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -412,6 +421,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B4704532C15D24C003B3238 /* Shadows.swift in Sources */,
 				3B459F3E2C14CEC200CE6B4C /* Character.swift in Sources */,
 				3B459F052C14C5CE00CE6B4C /* PersistenceController.swift in Sources */,
 				3B459F402C14CEC900CE6B4C /* Episode.swift in Sources */,
@@ -421,6 +431,7 @@
 				3B459F462C14EBF300CE6B4C /* CharactersListReducer.swift in Sources */,
 				3B4704402C1517E8003B3238 /* CharacterDetailsReducer.swift in Sources */,
 				3B459F422C14E1FE00CE6B4C /* APIResponse.swift in Sources */,
+				3B4704552C15D251003B3238 /* Margins.swift in Sources */,
 				3B47043E2C15147A003B3238 /* CharacterListItemView.swift in Sources */,
 				3B459F3A2C14CEAC00CE6B4C /* CharacterDetailsView.swift in Sources */,
 				3B459F4C2C15026200CE6B4C /* RickMortyNetworkWorker.swift in Sources */,
@@ -428,6 +439,7 @@
 				3B459F352C14C79A00CE6B4C /* FavouriteCharacterRepository.swift in Sources */,
 				3B459F442C14E34500CE6B4C /* MainView.swift in Sources */,
 				3B459F492C14F2CB00CE6B4C /* APIClient.swift in Sources */,
+				3B47044F2C15CD2F003B3238 /* GeometryModifier.swift in Sources */,
 				3B459F3C2C14CEB700CE6B4C /* EpisodeDetailsView.swift in Sources */,
 				3B459F082C14C5CE00CE6B4C /* RickMorty.xcdatamodeld in Sources */,
 				3B459EFC2C14C5CD00CE6B4C /* RickMortyApp.swift in Sources */,
@@ -597,6 +609,7 @@
 				DEVELOPMENT_TEAM = S73MBXSV7H;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Rick & Morty";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -627,6 +640,7 @@
 				DEVELOPMENT_TEAM = S73MBXSV7H;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Rick & Morty";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

@@ -19,7 +19,7 @@ struct Character: Codable, Identifiable {
 }
 
 struct NameURLTuple: Codable {
-    let name: String?
+    let name: String
 }
 
 #if DEBUG

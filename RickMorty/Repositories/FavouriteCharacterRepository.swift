@@ -65,6 +65,7 @@ class FavouriteCharacterRepository {
                     try self.context.save()
                     continuation.resume()
                 } catch {
+                    self.context.rollback()
                     continuation.resume(throwing: error)
                 }
             }
@@ -91,6 +92,7 @@ class FavouriteCharacterRepository {
                     
                     continuation.resume()
                 } catch {
+                    self.context.rollback()
                     continuation.resume(throwing: error)
                 }
             }

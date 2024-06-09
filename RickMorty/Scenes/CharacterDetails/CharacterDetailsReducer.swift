@@ -15,6 +15,9 @@ struct CharacterDetailsReducer {
         var character: Character
         var isFavourite: Bool = false
         var episodes: [Episode] = []
+        
+        var isLoading = true
+        var errorMessage: String?
     }
     
     enum Action {
@@ -33,11 +36,13 @@ struct CharacterDetailsReducer {
         Reduce { state, action in
             switch action {
             case .fetchIsFavourite:
+                // Fetch the favourite status for the character using repository client
                 return .run { [characterId = state.character.id] send in
                     let isFavourite = try await self.repositoryClient.fetchIsFavouriteCharacterId(characterId)
                     await send(.updateIsFavourite(isFavourite))
                 }
             case .toggleFavourite:
+                // Toggle the favourite status for the character using repository client
                 return .run { [character = state.character, isFavourite = state.isFavourite] send in
                     if isFavourite {
                         try await self.repositoryClient.removeFavouriteCharacterId(character.id)
@@ -48,20 +53,29 @@ struct CharacterDetailsReducer {
                     }
                 }
             case .loadEpisodes:
+                // Fetch episodes for the character using API client
+                state.isLoading = true
                 return .run { [episodeURLs = state.character.episode] send in
                     do {
                         let fetchedEpisodes = try await episodeURLs.asyncMap({ try await self.apiClient.fetchEpisode($0) })
-                        await send(.episodesLoaded(fetchedEpisodes))
+                        // Sort the episodes by episode number
+                        await send(.episodesLoaded(fetchedEpisodes.sorted(by: { $0.episode < $1.episode })))
                     } catch {
                         await send(.networkError(error))
                     }
                 }
             case let .episodesLoaded(episodes):
+                // Update the state with the fetched episodes
+                state.isLoading = false
                 state.episodes = episodes
                 return .none
             case let .networkError(error):
+                // Display error message from the network call
+                state.isLoading = false
+                state.errorMessage = error.localizedDescription
                 return .none
             case let .updateIsFavourite(isFavourite):
+                // Update the isFavourite status in the state
                 state.isFavourite = isFavourite
                 return .none
             }
