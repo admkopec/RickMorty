@@ -34,6 +34,7 @@ struct MainView: View {
                         }
                     }
             }
+            .navigationViewStyle(.stack)
             .transition(AnyTransition.move(edge: .bottom))
         }
     }

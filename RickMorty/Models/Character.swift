@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Character: Codable, Identifiable {
+struct Character: Codable, Identifiable, Equatable {
     let id: Int
     let name: String
     let status: String
@@ -16,6 +16,10 @@ struct Character: Codable, Identifiable {
     let location: NameURLTuple
     let image: URL
     let episode: [URL]
+    
+    static func == (lhs: Character, rhs: Character) -> Bool {
+        lhs.id == rhs.id
+    }
 }
 
 struct NameURLTuple: Codable {

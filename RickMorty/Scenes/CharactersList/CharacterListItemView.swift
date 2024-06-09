@@ -11,6 +11,8 @@ struct CharacterListItemView: View {
     let character: Character
     let isFavourite: Bool
     
+    @State private var imageId = UUID()
+    
     var body: some View {
         HStack {
             AsyncImage(url: character.image) { phase in
@@ -21,12 +23,18 @@ struct CharacterListItemView: View {
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 50, height: 50)
                         .clipShape(Circle())
-                } else if phase.error != nil {
+                } else if let error = phase.error {
                     // Error View
                     Color(uiColor: .systemFill)
                         .overlay(Image(systemName: "exclamationmark.triangle.fill"))
                         .frame(width: 50, height: 50)
                         .clipShape(Circle())
+                        .onAppear {
+                            // Retry if loading gets cancelled by LazyVStack, but we're still visible
+                            if (error as? URLError)?.code == .cancelled {
+                                imageId = UUID()
+                            }
+                        }
                 } else {
                     // Placeholder View
                     Color(uiColor: .systemFill)
@@ -35,6 +43,7 @@ struct CharacterListItemView: View {
                         .clipShape(Circle())
                 }
             }
+            .id(imageId)
             
             Text(character.name)
             

@@ -9,15 +9,15 @@ import Foundation
 import ComposableArchitecture
 
 struct APIClient {
-    var fetchCharactersForPage: (Int?) async throws -> ([Character], moreAvailable: Bool)
+    var fetchCharactersForPage: (Int?, String) async throws -> ([Character], moreAvailable: Bool)
     var fetchEpisode: (URL) async throws -> Episode
 }
 
 extension APIClient: DependencyKey {
     static let liveValue: APIClient = Self(
-        fetchCharactersForPage: { page in
+        fetchCharactersForPage: { page, searchQuery in
             let worker = RickMortyNetworkWorker()
-            return try await worker.fetchCharacters(page: page)
+            return try await worker.fetchCharacters(page: page, with: searchQuery)
         },
         fetchEpisode: { url in
             let worker = RickMortyNetworkWorker()

@@ -18,3 +18,11 @@ struct APIResponseInfo: Codable {
     let next: URL?
     let prev: URL?
 }
+
+struct APIErrorResponse: Codable {
+    let error: String
+}
+
+struct APIError: Error {
+    let message: String
+}

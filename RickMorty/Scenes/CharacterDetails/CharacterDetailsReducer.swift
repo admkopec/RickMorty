@@ -11,12 +11,12 @@ import ComposableArchitecture
 @Reducer
 struct CharacterDetailsReducer {
     @ObservableState
-    struct State {
+    struct State: Equatable {
         var character: Character
         var isFavourite: Bool = false
         var episodes: [Episode] = []
         
-        var isLoading = true
+        var isLoading = false
         var errorMessage: String?
     }
     
@@ -72,7 +72,11 @@ struct CharacterDetailsReducer {
             case let .networkError(error):
                 // Display error message from the network call
                 state.isLoading = false
-                state.errorMessage = error.localizedDescription
+                if let apiError = error as? APIError {
+                    state.errorMessage = apiError.message
+                } else {
+                    state.errorMessage = error.localizedDescription
+                }
                 return .none
             case let .updateIsFavourite(isFavourite):
                 // Update the isFavourite status in the state

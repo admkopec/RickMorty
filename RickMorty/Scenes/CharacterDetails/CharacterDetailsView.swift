@@ -151,6 +151,7 @@ struct CharacterDetailsView: View {
                         } label: {
                             Image(systemName: store.isFavourite ? "heart.fill" : "heart")
                                 .foregroundStyle(.red)
+                                .accessibilityLabel("Toggle Favourite")
                         }
                         .scaleEffect(store.isFavourite ? 1.2 : 1)
                         .animation(.interpolatingSpring(stiffness: 170, damping: 10), value: store.isFavourite)

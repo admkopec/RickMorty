@@ -9,7 +9,7 @@ import SwiftUI
 import ComposableArchitecture
 
 struct CharactersListView: View {
-    let store: StoreOf<CharactersListReducer>
+    @Perception.Bindable var store: StoreOf<CharactersListReducer>
     
     var body: some View {
         ScrollView {
@@ -61,6 +61,7 @@ struct CharactersListView: View {
                 .onAppear {
                     store.send(.fetchFavourites)
                 }
+                .searchable(text: $store.searchQuery.sending(\.searchQueryChanged), prompt: "Search by name")
             }
         }
         .navigationTitle("Characters")
