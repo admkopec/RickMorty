@@ -1,5 +1,5 @@
 //
-//  Persistence.swift
+//  PersistenceController.swift
 //  RickMorty
 //
 //  Created by Adam Kopeć on 08/06/2024.
@@ -14,8 +14,8 @@ struct PersistenceController {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
         for _ in 0..<10 {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
+            let newItem = FavouriteCharacter(context: viewContext)
+            newItem.characterId = Int32.random(in: 0..<100)
         }
         do {
             try viewContext.save()
