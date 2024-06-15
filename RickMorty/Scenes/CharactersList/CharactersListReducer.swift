@@ -11,7 +11,7 @@ import ComposableArchitecture
 @Reducer
 struct CharactersListReducer {
     @ObservableState
-    struct State: Equatable {
+    struct State: Equatable, Sendable {
         var searchQuery = ""
         var currentPage: Int?
         
@@ -19,16 +19,16 @@ struct CharactersListReducer {
         var didReachEnd = false
         var errorMessage: String?
         
-        var characters: IdentifiedArrayOf<Character> = []
+        var characters: IdentifiedArrayOf<RickMorty.Character> = []
         // Using a set to store favourite character IDs for faster lookups
         var favouriteCharacterIds: Set<Int> = []
     }
     
-    enum Action {
+    enum Action: Sendable {
         case fetchFavourites
         case fetchNextPage
         case favouritesResponse([Int])
-        case pageResponse(([Character], moreAvailable: Bool))
+        case pageResponse(([RickMorty.Character], moreAvailable: Bool))
         case networkError(Error)
         case searchQueryChanged(String)
     }

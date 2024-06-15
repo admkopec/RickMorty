@@ -11,8 +11,8 @@ import ComposableArchitecture
 @Reducer
 struct CharacterDetailsReducer {
     @ObservableState
-    struct State: Equatable {
-        var character: Character
+    struct State: Equatable, Sendable {
+        var character: RickMorty.Character
         var isFavourite: Bool = false
         var episodes: [Episode] = []
         
@@ -20,7 +20,7 @@ struct CharacterDetailsReducer {
         var errorMessage: String?
     }
     
-    enum Action {
+    enum Action: Sendable {
         case fetchIsFavourite
         case loadEpisodes
         case toggleFavourite
