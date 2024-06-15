@@ -32,12 +32,14 @@ final class RickMortyUITests: XCTestCase {
         XCTAssert(app.buttons["Get Started"].exists)
     }
 
-    func testCharactersList() throws {
+    @MainActor
+    func testCharactersList() async throws {
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
         app.launch()
         
         app.buttons["Get Started"].tap()
+        try await Task.sleep(for: .milliseconds(200))
 
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         XCTAssert(app.staticTexts["Characters"].exists)
