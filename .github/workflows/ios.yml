@@ -12,6 +12,10 @@ jobs:
     runs-on: macos-latest
 
     steps:
+      - name: ⚙️ Select latest available Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '15.3.0'
       - name: ☁️ Checkout
         uses: actions/checkout@v4
       - name: 🔧 Set Default Scheme
