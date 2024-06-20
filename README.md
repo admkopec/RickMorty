@@ -7,3 +7,5 @@ The application aims to be modular following Clean Architecture guidelines and i
 - `AsyncImage` for loading thumbnails only when needed
 - CoreData storage for keeping track of "Favourite" characters
 - `.searchable()` modifier for character searching
+## Disclaimer
+This is my first and only iOS project using TCA. I greatly appreciate the macros and extensive documentation including tutorials offered by this architecture. However, the way it implements reducers and dependecy injection, in my opinion greatly hinders code readability. This is why, I will most probably stick with Clean Swift or a variant of MVVM for my personal projects.
